@@ -50,6 +50,19 @@
         50%  {left: 45%;}
         100% {left: 55%;}
       }
+
+      #finger {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        transition: 0.5s;
+        width: 64px;
+        height: 64px;
+        animation: move 1s linear;
+        animation-iteration-count: infinite;
+      }
     </style>
 </head>
 <body>
@@ -98,6 +111,7 @@ setInterval(() => {
 }, 4000);
 
 function openUrl(){
-  window.open('https://www.pecos.com.tw/brands-%E7%B5%B1%E4%B8%80%E8%9B%8B%E7%B3%95%E5%B1%8B.html');}
+  window.open('https://www.pecos.com.tw/brands-%E7%B5%B1%E4%B8%80%E8%9B%8B%E7%B3%95%E5%B1%8B.html');
+}
 </script>
 </html>
