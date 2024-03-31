@@ -52,10 +52,10 @@
     <img src="./images/background0.png" style="width: 100vw;" />
     <img src="./images/background1.png" style="width: 100vw;" />
     <div id="ad-wrapper" onclick="playMusic()">
-      <img src="./images/78/item.gif" alt="" id="item" />
+      <img src="./images/79/item.gif" alt="" id="item" />
       <canvas id="cover"></canvas>
-      <img src="./images/78/end.gif" alt="" onclick="openUrl()" id="end"/>
-      <img src="./images/78/finger.png" alt="" id="finger" />
+      <img src="./images/79/end.gif" alt="" onclick="openUrl()" id="end"/>
+      <img src="./images/79/finger.png" alt="" id="finger" />
     </div>
     <img src="./images/background2.png" style="width: 100vw;" />
   </div>
@@ -76,7 +76,7 @@
 
   function playMusic() {
     const audio = document.createElement("audio");
-    audio.src = "./images/78/sound.mp3";
+    audio.src = "./images/79/sound.mp3";
     audio.loop = true
     audio.play();
     finger.remove();
@@ -110,12 +110,12 @@
         cover.width = width
         cover.height = height
         const image = new Image()
-        image.src = "./images/78/cover.png"
+        image.src = "./images/79/cover.png"
         image.crossOrigin = 'Anonymous'
         image.addEventListener('load', () => {
           coverCtx.drawImage(image, 0, 0, width, height);
           coverCtx.globalCompositeOperation = 'destination-out';
-          cover.style.background = "url(./images/78/background.png)"
+          cover.style.background = "url(./images/79/background.png)"
           cover.style.backgroundSize = "cover"
         });
         setTimeout(() => {
