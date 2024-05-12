@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transformer</title>
+  <style>
+    #adContainer {
+      width: 100vw;
+      height: 46.875vw;
+      position: relative;
+      transition: 0.5s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #image1 {
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    #image2 {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      left: 100%;
+    }
+
+    #image3 {
+      width: 100%;
+    }
+
+    #gif {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+  </style>
+</head>
+<body style="margin: 0;">
+  <img src="./images/background0.png" style="width: 100vw;" />
+  <img src="./images/background1.png" style="width: 100vw;" />
+  <div style="width: 100%; position: relative;">
+    <div id="adContainer" onclick="openUrl()">
+      <img src="./images/137/1.png" id="image1" />
+      <img src="./images/137/3.png" id="image2" />
+      <img src="./images/137/2.png" id="image3" />
+      <!-- <img src="" id="gif" /> -->
+    </div>
+  </div>
+  <img src="./images/background2.png" style="width: 100vw;" />
+</body>
+</html>
+<script>
+  const container = document.getElementById('adContainer');
+  const image2 = document.getElementById('image2');
+  let isBelow = undefined
+
+  window.addEventListener('scroll', scrollListener);
+
+  function scrollListener(event) {
+    if (isBelow === undefined) {
+      isBelow = container.getClientRects()[0].y > window.screen.height / 2
+    }
+    const windowH = window.screen.height
+    const containerH = container.clientHeight
+    const start = isBelow ? windowH - containerH : 0
+    const end = (windowH - containerH) / 2
+    const current = container.getClientRects()[0].y
+    if (isBelow) {
+      if (current > end) {
+        image2.style.left = `${(current - end) / (start - end) * 100}%`
+        return
+      }
+    } else {
+      if (current < end) {
+        image2.style.left = `${(end - current) / (end - start) * 100}%`
+        return
+      }
+    }
+    window.removeEventListener('scroll', scrollListener)
+    adContainer.style.height = 'calc(150vw - 1px)'
+    image2.style.left = '0'
+    // gif.style.display = 'block'
+    // gif.src = './images/110/4.gif'
+  }
+
+  function openUrl() {
+    window.open('https://access.line.me/oauth2/v2.1/login?returnUri=%2Foauth2%2Fv2.1%2Fauthorize%2Fconsent%3Fapp_id%3D1655379260-OXMaqAdx%26client_id%3D1655379260%26scope%3Dopenid%2Bprofile%26state%3DXzPN2tcbhxdX%26response_type%3Dcode%26code_challenge_method%3DS256%26code_challenge%3D6rrewCpN6id-QQ4YlufNw3xwOQ7nJ7xaCIOznbwu9r0%26liff_sdk_version%3D2.22.4%26type%3DL%26redirect_uri%3Dhttps%253A%252F%252Fs.no8.io%252Flink%252Fline%252Fauth%253Fliff.state%253D%25253Fcustom%25253D8dT%252526token%25253DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5lTGlmZklkIjoiMTY1NTM3OTI2MC1PWE1hcUFkeCIsImxpbmVDaGFubmVsSWQiOiIxNjU1Mzc5MjYwIiwiY2hhbm5lbElkIjoiVVRoSmk3WHJJNCIsIm9yZ2FuaXphdGlvbklkIjoiV1hzNnc1QUI2TSIsImlhdCI6MTcxMDEzOTQ0MywiZXhwIjoxNzEwNzQ0MjQzfQ.19_45UGBbDT-5daMDCvBt0FKZIGgI2bAWtHQKhUAnug%26bot_prompt%3Daggressive&loginChannelId=1655379260&loginState=nxtDm7dTdzUEUc4slrCrj8#/');
+  }
+</script>
