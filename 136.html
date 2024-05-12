@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>content-gallery h5 template</title>
+  <style>
+    * {
+      margin: 0;
+    }
+
+    body {
+      background-color: transparent;
+    }
+
+    .swiper-slide-img {
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+  </style>
+</head>
+<body>
+<img src="./images/background0.png" style="width: 100vw;" />
+<img src="./images/background1.png" style="width: 100vw;" />
+<div id="ad-wrapper">
+  <div onclick="openUrl()">
+    <div>
+      <img class="swiper-slide-img" src="./images/136/1.png" alt="" >
+    </div>
+  </div>
+</div>
+<img src="./images/background2.png" style="width: 100vw;" />
+</body>
+<script>
+  function openUrl(){
+    window.open('https://access.line.me/oauth2/v2.1/login?returnUri=%2Foauth2%2Fv2.1%2Fauthorize%2Fconsent%3Fapp_id%3D1655379260-OXMaqAdx%26client_id%3D1655379260%26scope%3Dopenid%2Bprofile%26state%3DXzPN2tcbhxdX%26response_type%3Dcode%26code_challenge_method%3DS256%26code_challenge%3D6rrewCpN6id-QQ4YlufNw3xwOQ7nJ7xaCIOznbwu9r0%26liff_sdk_version%3D2.22.4%26type%3DL%26redirect_uri%3Dhttps%253A%252F%252Fs.no8.io%252Flink%252Fline%252Fauth%253Fliff.state%253D%25253Fcustom%25253D8dT%252526token%25253DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5lTGlmZklkIjoiMTY1NTM3OTI2MC1PWE1hcUFkeCIsImxpbmVDaGFubmVsSWQiOiIxNjU1Mzc5MjYwIiwiY2hhbm5lbElkIjoiVVRoSmk3WHJJNCIsIm9yZ2FuaXphdGlvbklkIjoiV1hzNnc1QUI2TSIsImlhdCI6MTcxMDEzOTQ0MywiZXhwIjoxNzEwNzQ0MjQzfQ.19_45UGBbDT-5daMDCvBt0FKZIGgI2bAWtHQKhUAnug%26bot_prompt%3Daggressive&loginChannelId=1655379260&loginState=nxtDm7dTdzUEUc4slrCrj8#/');
+  }
+</script>
+</html>
