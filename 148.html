@@ -24,10 +24,13 @@
       top: -40%;
     }
 
-     #end {
-        width: 100%;
-        display: none;
-      }
+    #end {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: none;
+    }
 
     @keyframes flash {
       0% { opacity: 1; }
@@ -124,7 +127,6 @@
           setTimeout(() => {
             finger.remove()
           }, 5000);
-          // Hand finger seconds
         }
       }
     }
@@ -178,7 +180,9 @@
         item.remove();
         cover.remove();
         end.style.display = "block";
-        end.play();  // Ensure the video starts playing
+        setTimeout(() => {
+          end.play();
+        }, 100);  // Ensure the video starts playing
         ad.removeEventListener('mousedown', eventDown);
         ad.removeEventListener('mouseup', eventUp);
         document.removeEventListener('mouseup', () => mousedown = false);
