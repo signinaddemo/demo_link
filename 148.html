@@ -56,13 +56,13 @@
     <img src="./images/background0.png" style="width: 100vw;" />
     <img src="./images/background1.png" style="width: 100vw;" />
     <div id="ad-wrapper" onclick="playMusic()">
-      <img src="./images/148/item.gif" alt="" id="item" />
+      <img src="./images/138/item.gif" alt="" id="item" />
       <canvas id="cover"></canvas>
       <video muted playsinline id="end" onclick="openUrl()">
-        <source src="./images/148/end.mp4" type="video/mp4">
+        <source src="./images/138/end.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <img src="./images/148/finger.gif" alt="" id="finger" />
+      <img src="./images/138/finger.gif" alt="" id="finger" />
     </div>
     <img src="./images/background2.png" style="width: 100vw;" />
   </div>
@@ -82,7 +82,7 @@
 
     function playMusic() {
       const audio = document.createElement("audio");
-      audio.src = "./images/148/sound.mp3";
+      audio.src = "./images/138/sound.mp3";
       audio.loop = true
       audio.play();
       finger.remove();
@@ -116,17 +116,18 @@
           cover.width = width
           cover.height = height
           const image = new Image()
-          image.src = "./images/148/cover.png"
+          image.src = "./images/138/cover.png"
           image.crossOrigin = 'Anonymous'
           image.addEventListener('load', () => {
             coverCtx.drawImage(image, 0, 0, width, height);
             coverCtx.globalCompositeOperation = 'destination-out';
-            cover.style.background = "url(./images/148/background.png)"
+            cover.style.background = "url(./images/138/background.png)"
             cover.style.backgroundSize = "cover"
           });
           setTimeout(() => {
             finger.remove()
           }, 5000);
+          // 手指秒數
         }
       }
     }
