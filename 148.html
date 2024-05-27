@@ -1,3 +1,4 @@
+
 <html lang="en">
 
 <head>
@@ -37,11 +38,11 @@
 
       #finger {
         position: absolute;
-        left: 45%;
-        top: 55%;
+        left: 50%;
+        top: 50%;
         transform: translate(-50%, -50%);
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
         animation: flash 1s linear;
         animation-iteration-count: infinite;
       }
@@ -58,7 +59,7 @@
         <source src="./images/148/video.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <img src="./images/148/finger.gif" alt="" id="finger" />
+      <img src="./images/148/finger.png" alt="" id="finger" />
     </div>
     <img src="./images/background2.png" style="width: 100vw;" />
   </div>
@@ -78,7 +79,6 @@
   initial()
 
   function start() {
-    finger.remove();
     ad.addEventListener('mousedown', eventDown);
     ad.addEventListener('mouseup', eventUp);
     document.addEventListener('mouseup', () => mousedown=false);
@@ -117,10 +117,7 @@
           cover.style.background = "url(./images/148/background.png)"
           cover.style.backgroundSize = "cover"
         });
-        setTimeout(() => {
-          start()
-        }, 10000);
-        // 手指秒數
+        start();
       }
     }
   }
@@ -128,6 +125,7 @@
   function eventDown(ev){
     ev.preventDefault();
     mousedown=true;
+    finger.remove();
   }
 
   function eventUp(ev){
@@ -169,7 +167,7 @@
   function handleFilledPercentage(percentage) {
     percentage = percentage || 0;
     // 設定多少 % 的畫面被噴漆就下一 cut
-    if (parseInt(percentage) > 30) {
+    if (parseInt(percentage) > 32) {
         coverCtx.clearRect(0, 0, width, height);
         hasDone = true;
         item.remove();
