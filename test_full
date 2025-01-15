@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>content-gallery h5 template</title>
+  <style>
+    * {
+      margin: 0;
+    }
+
+    body {
+      background-color: transparent;
+    }
+
+    .swiper-slide-img {
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    #ad-wrapper { /* 請依照你的CM360設定調整 */
+        /*  width: 300px;  
+        height: 250px; */
+     }
+  </style>
+</head>
+<body>
+<img src="./images/background0.png" style="width: 100vw;" />
+<img src="./images/background1.png" style="width: 100vw;" />
+<div id="ad-wrapper">
+    <ins class='dcmads' style='display:inline-block;width:1px;height:1px'
+        data-dcm-placement='N8689.4719235SIGNINAD/B32445179.412951582'
+        data-dcm-rendering-mode='script'
+        data-dcm-https-only
+        data-dcm-api-frameworks='[APIFRAMEWORKS]'
+        data-dcm-omid-partner='[OMIDPARTNER]'
+        data-dcm-gdpr-applies='gdpr=${GDPR}'
+        data-dcm-gdpr-consent='gdpr_consent=${GDPR_CONSENT_755}'
+        data-dcm-addtl-consent='addtl_consent=${ADDTL_CONSENT}'
+        data-dcm-ltd='false'
+        data-dcm-resettable-device-id=''
+        data-dcm-app-id=''>
+        <script src='https://www.googletagservices.com/dcm/dcmads.js'></script>
+      </ins>
+</div>
+<img src="./images/background2.png" style="width: 100vw;" />
+</body>
+</html>
