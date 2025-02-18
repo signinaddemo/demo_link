@@ -9,54 +9,57 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <style>
-      * {
-        margin: 0;
-      }
+    * {
+      margin: 0;
+    }
 
-      body {
-        background-color: transparent;
-      }
+    body {
+      background-color: transparent;
+    }
 
-      .banner {
-        width: 100vw;
-        height: 150vw;
-        overflow: hidden;
-      }
+    .banner {
+      width: 100vw;
+      height: 150vw;
+      overflow: hidden;
+    }
 
-      .swiper-container {
-        width: 100%;
-        height: 150vw;
-      }
+    .swiper-container {
+      width: 100%;
+      height: 150vw;
+    }
 
-      .swiper-slide {
-        overflow: visible !important;
-      }
+    .swiper-slide {
+      overflow: visible !important;
+    }
 
-      .swiper-slide-shadow {
-        opacity: 1 !important;
-        background: transparent !important;
-        box-shadow: 15px 0px 5px 0px rgba(0, 0, 0, 0.4) !important;
-      }
+    .swiper-slide-shadow {
+      opacity: 1 !important;
+      background: transparent !important;
+      box-shadow: 15px 0px 5px 0px rgba(0, 0, 0, 0.4) !important;
+    }
 
-      .swiper-slide-img {
-        width: 100%;
-        height: 150vw;
-        padding: 5px;
-        box-sizing: border-box;
-      }
+    .swiper-slide-img {
+      width: 100%;
+      height: 150vw;
+      padding: 5px;
+      box-sizing: border-box;
+    }
   </style>
 </head>
 
 <body>
   <img src="./images/background0.png" style="width: 100vw;" />
   <img src="./images/background1.png" style="width: 100vw;" />
-  
+
   <div class="banner" id="banner">
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <!-- 使用 <video> 來播放影片 -->
-          <video id="myVideo" class="swiper-slide-img" src="./images/459/1.mp4" muted playsinline></video>
+          <!-- 使用 <video> 來播放影片，移除 autoplay -->
+          <video id="myVideo" class="swiper-slide-img" muted playsinline>
+            <source src="./images/459/1.mp4" type="video/mp4">
+            您的瀏覽器不支援 HTML5 影片。
+          </video>
         </div>
       </div>
     </div>
@@ -68,22 +71,28 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const video = document.getElementById("myVideo");
+    const swiperContainer = document.querySelector('.swiper-container'); // 取得 swiper container
+    let swiper; // 宣告swiper變數
 
-    // 強制手動播放，確保瀏覽器不會阻擋
-    function playVideo() {
-      video.play().then(() => {
-        console.log("影片播放開始。");
-      }).catch(error => {
-        console.log("自動播放被阻擋，請點擊播放。");
-      });
-    }
+    // 初始化 Swiper (必須在這裡初始化，確保 video 元素已經載入)
+    swiper = new Swiper('.swiper-container', {
+      // Swiper 設定 (根據您的需要調整)
+      loop: false, // 確保不循環播放
+      // 其他設定...
+    });
 
-    // 等待使用者互動後播放
-    document.body.addEventListener("click", playVideo, { once: true });
 
-    // 監聽影片播放結束，確保不會重播
+    // 在滑到影片 slide 時才開始播放
+    swiper.on('slideChangeTransitionEnd', function() {
+      if (swiper.activeIndex === 0) { // 假設影片在第一個 slide
+        video.play();
+      }
+    });
+
+    // 確保影片播放結束後停止 Swiper 輪播
     video.addEventListener("ended", function() {
-      console.log("影片播放結束，不會自動重播。");
+      console.log("影片播放結束，停止 Swiper。");
+      swiper.destroy(); // 停止 Swiper
     });
   });
 </script>
