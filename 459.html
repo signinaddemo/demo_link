@@ -56,7 +56,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <!-- 使用 <video> 來播放影片 -->
-          <video id="myVideo" class="swiper-slide-img" src="./images/459/1.mp4" autoplay muted></video>
+          <video id="myVideo" class="swiper-slide-img" src="./images/459/1.mp4" muted playsinline></video>
         </div>
       </div>
     </div>
@@ -69,14 +69,21 @@
   document.addEventListener("DOMContentLoaded", function() {
     const video = document.getElementById("myVideo");
 
-    // 確保影片只播放一次
+    // 強制手動播放，確保瀏覽器不會阻擋
+    function playVideo() {
+      video.play().then(() => {
+        console.log("影片播放開始。");
+      }).catch(error => {
+        console.log("自動播放被阻擋，請點擊播放。");
+      });
+    }
+
+    // 等待使用者互動後播放
+    document.body.addEventListener("click", playVideo, { once: true });
+
+    // 監聽影片播放結束，確保不會重播
     video.addEventListener("ended", function() {
       console.log("影片播放結束，不會自動重播。");
-    });
-
-    // 確保瀏覽器允許自動播放
-    video.play().catch(error => {
-      console.log("自動播放被阻擋，等待使用者互動...");
     });
   });
 </script>
