@@ -66,11 +66,18 @@
 </body>
 
 <script>
-  const video = document.getElementById("myVideo");
+  document.addEventListener("DOMContentLoaded", function() {
+    const video = document.getElementById("myVideo");
 
-  // 監聽影片播放結束事件，確保影片不會重播
-  video.addEventListener("ended", function() {
-    video.pause();  // 確保影片不會再播放
+    // 確保影片只播放一次
+    video.addEventListener("ended", function() {
+      console.log("影片播放結束，不會自動重播。");
+    });
+
+    // 確保瀏覽器允許自動播放
+    video.play().catch(error => {
+      console.log("自動播放被阻擋，等待使用者互動...");
+    });
   });
 </script>
 
