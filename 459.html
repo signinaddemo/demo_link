@@ -44,6 +44,25 @@
         padding: 5px;
         box-sizing: border-box;
       }
+
+      @keyframes move {
+        0%   {left: 55%;}
+        50%  {left: 45%;}
+        100% {left: 55%;}
+      }
+
+      #finger {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        transition: 0.5s;
+        width: 64px;
+        height: 64px;
+        animation: move 1s linear;
+        animation-iteration-count: infinite;
+      }
   </style>
 </head>
 
@@ -59,6 +78,7 @@
           <video id="myVideo" class="swiper-slide-img" src="./images/459/1.mp4" autoplay muted></video>
         </div>
       </div>
+      <img src="./images/finger.png" alt="" id="finger" />
     </div>
   </div>
 
@@ -66,18 +86,46 @@
 </body>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const video = document.getElementById("myVideo");
+  const finger = document.getElementById("finger");
+  var swiper = new Swiper('.swiper-container', {
+    effect: "creative",
+    grabCursor: false,
+    loop: true,
+    spaceBetween: 10,
+    speed: 100,
+    creativeEffect: {
+      limitProgress: 3,
+      shadowPerProgress: true,
+      prev: {
+        translate: ["-120%", 0, 0],
+        rotate: [0, 0, 10],
+        shadow: true
+      },
+      next: {
+        translate: ["0%", 0, -500]
+      },
+    },
+  });
 
-    // 確保影片只播放一次
-    video.addEventListener("ended", function() {
-      console.log("影片播放結束，不會自動重播。");
-    });
+  swiper.on('slideChange', function () {
+    finger.style.opacity = "0";
+  });
 
-    // 確保瀏覽器允許自動播放
-    video.play().catch(error => {
-      console.log("自動播放被阻擋，等待使用者互動...");
-    });
+  setInterval(() => {
+    swiper.slideNext();
+    finger.style.opacity = "0";
+  }, 4000);
+
+  function openUrl(){
+    window.open('https://www.uni-sunshine.com.tw/products/content/6');
+  }
+
+  // 讓影片在 11 秒後自動暫停
+  const video = document.getElementById("myVideo");
+  video.addEventListener("loadedmetadata", function() {
+    setTimeout(() => {
+      video.pause();
+    }, 11000); // 11 秒後暫停
   });
 </script>
 
