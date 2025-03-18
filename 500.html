@@ -3,89 +3,64 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>變形小金剛-影+圖</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+      * {
+        margin: 0;
+      }
 
-    #ad-wrapper {
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column; /* 影片在上，圖片在下 */
-      align-items: center;
-    }
+      #ad-wrapper {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column; /* 影片在上，圖片在下 */
+        align-items: center;
+      }
 
-    #video-wrapper {
-      width: 100%;
-      cursor: pointer;
-    }
+      #video-wrapper {
+        width: 100%;
+        cursor: pointer;
+      }
 
-    #video {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
+      #video {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
 
-    #img-wrapper {
-      width: 100%;
-      cursor: pointer;
-    }
-
-    #img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-
-    #muteButton {
-      position: absolute;
-      bottom: 16px;
-      right: 10px;
-      height: 24px;
-      width: 24px;
-    }
-
-    #banner {
-      position: relative;
-      width: 100%;
-      height: auto;
-    }
+      #banner {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
   </style>
 </head>
-
 <body>
   <img src="./images/background0.png" style="width: 100vw;" />
   <img src="./images/background1.png" style="width: 100vw;" />
   
   <div id="ad-wrapper">
-    <!-- 影片區塊 -->
     <div id="video-wrapper">
       <video loop muted playsinline id="video" onclick="openUrl()">
         <source src="./images/500/video.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <img onclick="muteButtonOnClick()" src="./images/mute.png" id="muteButton" />
+      <img onclick="muteButtonOnClick()" src="./images/mute.png" style="position: absolute; bottom: 16px; right: 10px; height: 24px; width: 24px;" id="muteButton" />
     </div>
-
-    <!-- 圖片區塊 -->
-    <div id="img-wrapper">
-      <img src="./images/500/b.png" id="img" onclick="openUrl()">
+    
+    <div id="banner" onclick="openUrl()">
+      <img src="./images/500/b.png" style="width: 100%; height: auto;"/>
     </div>
   </div>
 
   <img src="./images/background2.png" style="width: 100vw;" />
 </body>
-
 <script>
   const video = document.getElementById('video');
-  const muteButton = document.getElementById('muteButton');
+  const adWrapper = document.getElementById('ad-wrapper');
+  const adBanner = document.getElementById('banner');
 
   function muteButtonOnClick() {
     video.muted = !video.muted;
@@ -93,8 +68,28 @@
   }
 
   function openUrl() {
-    window.open('https://ad.doubleclick.net/ddm/trackclk/N49701.4719235SIGNINAD/B33292671.415360426');
+    window.open('https://lihi1.com/7pw8P');
   }
-</script>
 
+  function openAd() {
+    if (isOpened) return;
+    isOpened = true;
+
+    adWrapper.style.display = 'block';
+    adBanner.style.display = 'block';
+    
+    video.play().catch(error => console.log("Video play failed:", error));
+  }
+
+  let isOpened = false;
+  window.addEventListener('scroll', () => {
+    const videoHeight = video.getBoundingClientRect().height;
+    const topValue = video.getBoundingClientRect().y;
+    const screenH = window.innerHeight;
+
+    if (!isOpened && topValue < screenH - videoHeight) {
+        openAd();
+    }
+  });
+</script>
 </html>
