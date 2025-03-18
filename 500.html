@@ -21,6 +21,7 @@
 
       #video-wrapper {
         width: 100%;
+        position: relative;
         cursor: pointer;
       }
 
@@ -28,6 +29,15 @@
         width: 100%;
         height: auto;
         object-fit: cover;
+      }
+
+      #muteButton {
+        position: absolute;
+        bottom: 16px;
+        right: 10px;
+        height: 24px;
+        width: 24px;
+        cursor: pointer;
       }
 
       #banner {
@@ -44,14 +54,14 @@
   <div id="ad-wrapper">
     <div id="video-wrapper">
       <video loop muted playsinline id="video" onclick="openUrl()">
-        <source src="./images/500/video.mp4" type="video/mp4">
+        <source src="./images/62/video.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <img onclick="muteButtonOnClick()" src="./images/mute.png" style="position: absolute; bottom: 16px; right: 10px; height: 24px; width: 24px;" id="muteButton" />
+      <img onclick="muteButtonOnClick()" src="./images/mute.png" id="muteButton" />
     </div>
     
     <div id="banner" onclick="openUrl()">
-      <img src="./images/500/b.png" style="width: 100%; height: auto;"/>
+      <img src="./images/62/b.png" style="width: 100%; height: auto;"/>
     </div>
   </div>
 
@@ -59,6 +69,7 @@
 </body>
 <script>
   const video = document.getElementById('video');
+  const muteButton = document.getElementById('muteButton');
   const adWrapper = document.getElementById('ad-wrapper');
   const adBanner = document.getElementById('banner');
 
