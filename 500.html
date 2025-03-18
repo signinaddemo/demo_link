@@ -145,6 +145,14 @@
           TweenMax.to(adImage2Wrapper, 0, { opacity: 0 });
         }
       });
+    slot.style.transition = 'width 0.8s';
+adBanner.style.transition = 'all 0.8s';
+
+slot.style.width = '100%';
+adWrapper.style.paddingBottom = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
+adBanner.style.top = slot.clientHeight + 'px';
+adBanner.style.width = '100%';
+adBanner.style.height = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
   }
 </script>
 <script>
