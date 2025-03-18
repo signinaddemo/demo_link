@@ -3,56 +3,60 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>變形小金剛-影+圖</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/PixiPlugin.min.js"></script>
   <style>
-      * {
-        margin: 0;
-      }
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-      #ad-wrapper {
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column; /* 影片在上，圖片在下 */
-        align-items: center;
-      }
+    #ad-wrapper {
+      width: 100%;
+      position: relative;
+      display: none; /* 初始隱藏，滾動後顯示 */
+      flex-direction: column; /* 影片在上，banner 在下 */
+      align-items: center;
+    }
 
-      #video-wrapper {
-        width: 100%;
-        position: relative;
-        cursor: pointer;
-      }
+    #video-wrapper {
+      width: 100%;
+      cursor: pointer;
+    }
 
-      #video {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-      }
+    #video {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
 
-      #muteButton {
-        position: absolute;
-        bottom: 16px;
-        right: 10px;
-        height: 24px;
-        width: 24px;
-        cursor: pointer;
-        z-index: 1000; /* 確保音量按鈕顯示在最上層 */
-      }
+    #banner {
+      width: 100%;
+      height: auto;
+      position: relative;
+      display: block;
+    }
 
-      #banner {
-        position: relative;
-        width: 100%;
-        height: auto;
-      }
+    #muteButton {
+      position: absolute;
+      bottom: 16px;
+      right: 10px;
+      height: 24px;
+      width: 24px;
+    }
   </style>
 </head>
+
 <body>
   <img src="./images/background0.png" style="width: 100vw;" />
   <img src="./images/background1.png" style="width: 100vw;" />
-  
+
   <div id="ad-wrapper">
+    <!-- 影片區塊 -->
     <div id="video-wrapper">
       <video loop muted playsinline id="video" onclick="openUrl()">
         <source src="./images/62/video.mp4" type="video/mp4">
@@ -60,23 +64,25 @@
       </video>
       <img onclick="muteButtonOnClick()" src="./images/mute.png" id="muteButton" />
     </div>
-    
+
+    <!-- Banner 圖片區塊 -->
     <div id="banner" onclick="openUrl()">
-      <img src="./images/62/b.png" style="width: 100%; height: auto;"/>
+      <img src="./images/62/b.png" />
     </div>
   </div>
 
   <img src="./images/background2.png" style="width: 100vw;" />
 </body>
+
 <script>
   const video = document.getElementById('video');
-  const muteButton = document.getElementById('muteButton');
   const adWrapper = document.getElementById('ad-wrapper');
   const adBanner = document.getElementById('banner');
+  let isOpened = false;
 
   function muteButtonOnClick() {
     video.muted = !video.muted;
-    muteButton.src = `./images/${video.muted ? 'mute' : 'volume'}.png`;
+    document.getElementById("muteButton").src = `./images/${video.muted ? 'mute' : 'volume'}.png`;
   }
 
   function openUrl() {
@@ -84,24 +90,26 @@
   }
 
   function openAd() {
-    if (isOpened) return;
+    if (isOpened) return; // 確保只執行一次
     isOpened = true;
 
+    // 顯示廣告區塊
     adWrapper.style.display = 'block';
-    adBanner.style.display = 'block';
-    
+
+    // **立即播放影片**
     video.play().catch(error => console.log("Video play failed:", error));
   }
 
-  let isOpened = false;
+  // 滾動事件：當影片進入視窗範圍，顯示影片與 banner
   window.addEventListener('scroll', () => {
     const videoHeight = video.getBoundingClientRect().height;
     const topValue = video.getBoundingClientRect().y;
     const screenH = window.innerHeight;
 
     if (!isOpened && topValue < screenH - videoHeight) {
-        openAd();
+      openAd(); // 立即展開廣告
     }
   });
 </script>
+
 </html>
