@@ -44,10 +44,19 @@
     }
 
     #banner {
-      width: 100%;
+      width: 70%; /* 讓 banner 佔 70% 寬度 */
       height: auto;
       position: relative;
+      display: flex;
+      justify-content: center; /* 水平置中 */
+      align-items: center;
+      margin-top: 0; /* 確保 banner 緊貼影片 */
+    }
+
+    #banner img {
       display: block;
+      max-width: 100%;
+      height: auto;
     }
   </style>
 </head>
@@ -95,7 +104,9 @@
     isOpened = true;
 
     // 顯示廣告區塊
-    adWrapper.style.display = 'block';
+    adWrapper.style.display = 'flex';
+    adWrapper.style.flexDirection = 'column';
+    adWrapper.style.alignItems = 'center';
 
     // **立即播放影片**
     video.play().catch(error => console.log("Video play failed:", error));
