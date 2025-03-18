@@ -156,26 +156,27 @@ adBanner.style.height = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
     };
   }
 
-  window.addEventListener('scroll', (event) => {
-    const videoHeight = video.getBoundingClientRect().height
-    const topValue = video.getBoundingClientRect().y
-    const screenH = window.screen.height;
+window.addEventListener('scroll', () => {
+    const videoHeight = video.getBoundingClientRect().height;
+    const topValue = video.getBoundingClientRect().y;
+    const screenH = window.innerHeight;
 
     if (!isOpened) {
-      if (topValue < screenH - videoHeight) {
-        openAd()
-        isOpened = true
-      }
-    } else {
-      if (
-        topValue < screenH - videoHeight / 2 &&
-        topValue > -(videoHeight / 2)
-      ) {
-        playVideo();
-      } else {
-        pauseVideo();
-      }
+        if (topValue < screenH - videoHeight) {
+            openAd();
+            isOpened = true;
+        }
     }
-  });
+
+    if (topValue < screenH - videoHeight / 2 && topValue > -(videoHeight / 2)) {
+        if (video.paused) {
+            video.play().catch(error => console.log("Video play failed:", error));
+        }
+    } else {
+        if (!video.paused) {
+            video.pause();
+        }
+    }
+});
 </script>
 </html>
