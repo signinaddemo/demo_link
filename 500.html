@@ -129,12 +129,20 @@
     const slot = adVideoWrapper ? adVideoWrapper : adImageWrapper;
     const topWrapperHeight = adVideoWrapper ? adVideoWrapper.clientHeight : adImageWrapper.clientHeight;
 
-    // 設定影片與 banner 的寬度與位置
-    slot.style.width = '100%';
-    adWrapper.style.paddingBottom = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
-    adBanner.style.top = '0px';
+    // 設定影片的樣式，確保在最上方
+    video.style.position = 'absolute'; 
+    video.style.top = '0px'; 
+    video.style.left = '0px';
+    video.style.width = '100%';
+    video.style.height = 'auto';
+    video.style.zIndex = '10'; // **確保影片在最上方**
+
+    // 設定 banner 的樣式，確保它在影片下方
+    adBanner.style.position = 'absolute';
+    adBanner.style.top = video.clientHeight + 'px'; // **讓 banner 緊貼在影片底部**
     adBanner.style.width = '100%';
     adBanner.style.height = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
+    adBanner.style.zIndex = '5'; // **比影片低，確保不會覆蓋影片**
 
     // **直接播放影片，確保同步顯示**
     video.play().catch(error => console.log("Video play failed:", error));
