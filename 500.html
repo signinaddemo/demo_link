@@ -6,24 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>變形小金剛-影+圖</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/PixiPlugin.min.js"></script>
   <style>
     * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     #ad-wrapper {
       width: 100%;
       position: relative;
       display: none; /* 初始隱藏，滾動後顯示 */
-      flex-direction: column; /* 影片在上，banner 在下 */
+      flex-direction: column;
       align-items: center;
     }
 
     #video-wrapper {
       width: 100%;
+      position: relative;
       cursor: pointer;
     }
 
@@ -34,19 +34,20 @@
       display: block;
     }
 
-    #banner {
-      width: 100%;
-      height: auto;
-      position: relative;
-      display: block;
-    }
-
     #muteButton {
       position: absolute;
       bottom: 16px;
       right: 10px;
       height: 24px;
       width: 24px;
+      z-index: 10;
+    }
+
+    #banner {
+      width: 100%;
+      height: auto;
+      position: relative;
+      display: block;
     }
   </style>
 </head>
@@ -59,7 +60,7 @@
     <!-- 影片區塊 -->
     <div id="video-wrapper">
       <video loop muted playsinline id="video" onclick="openUrl()">
-        <source src="./images/62/video.mp4" type="video/mp4">
+        <source src="./images/500/video.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
       <img onclick="muteButtonOnClick()" src="./images/mute.png" id="muteButton" />
