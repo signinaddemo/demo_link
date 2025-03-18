@@ -14,16 +14,19 @@
 
       #ad-wrapper {
         width: 100%;
+        height: calc(100vw * 0.5625);
         position: relative;
         overflow: hidden;
         display: flex;
-        flex-direction: column; /* 影片在上，圖片在下 */
-        align-items: center;
+        flex-direction: row-reverse;
       }
 
       #video-wrapper {
-        width: 100%;
-        cursor: pointer;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width:30%;
+        cursor:pointer;
       }
 
       #video {
@@ -34,7 +37,7 @@
 
       #img-wrapper {
         cursor: pointer;
-        width: 100%;
+        width: 30%;
       }
 
       #img {
@@ -61,7 +64,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
+        width: 70%;
         height: 100%;
         overflow: hidden;
       }
@@ -127,6 +130,23 @@
     const topWrapperHeight = adVideoWrapper ? adVideoWrapper.clientHeight : adImageWrapper.clientHeight;
 
     const openHeight = topWrapperHeight + (adImage2Wrapper.clientWidth / 0.7 / 300 * 80);
+
+    playVideo()
+    delay()
+      .then(() => {
+        if (false) {
+          adImage2Wrapper.style.opacity = 0;
+          TweenMax.to(adImage2Wrapper, 0, { opacity: 0 });
+            return delay(0);
+        }
+      })
+      .then(() => {
+        if (false) {
+          TweenMax.to(adImage2Wrapper, 0, { opacity: 0 });
+        }
+      });
+    slot.style.transition = 'width 0.8s';
+adBanner.style.transition = 'all 0.8s';
 
 slot.style.width = '100%';
 adWrapper.style.paddingBottom = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
