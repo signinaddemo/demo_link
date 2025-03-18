@@ -101,7 +101,7 @@
 <script>
   function muteButtonOnClick() {
     video.muted = !video.muted;
-    muteButton.src = `./images/${video.muted ? 'mute' : 'volume'}.png`;
+    muteButton.src = ./images/${video.muted ? 'mute' : 'volume'}.png;
   }
 
   function playVideo() {
@@ -123,29 +123,17 @@
   }
 
   function openAd() {
-    if (isOpened) return; // 確保只執行一次
-    isOpened = true;
+    const slot = adVideoWrapper ? adVideoWrapper : adImageWrapper;
+    const topWrapperHeight = adVideoWrapper ? adVideoWrapper.clientHeight : adImageWrapper.clientHeight;
 
-    // 確保 ad-wrapper 擁有適當高度
-    adWrapper.style.position = 'relative';
-    adWrapper.style.height = 'auto';
+    const openHeight = topWrapperHeight + (adImage2Wrapper.clientWidth / 0.7 / 300 * 80);
 
-    // 設定影片樣式，保持 relative 以確保正常排列
-    video.style.position = 'relative'; 
-    video.style.width = '100%';
-    video.style.height = 'auto';
-    video.style.zIndex = '10'; // 確保影片在最上方
-
-    // 設定 banner 樣式，讓它緊貼影片底部
-    adBanner.style.position = 'relative';
-    adBanner.style.width = '100%';
-    adBanner.style.height = 'auto';
-    adBanner.style.zIndex = '5'; // 確保不會覆蓋影片
-
-    // **直接播放影片，確保同步顯示**
-    video.play().catch(error => console.log("Video play failed:", error));
-}
-
+slot.style.width = '100%';
+adWrapper.style.paddingBottom = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
+adBanner.style.top = slot.clientHeight + 'px';
+adBanner.style.width = '100%';
+adBanner.style.height = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
+  }
 </script>
 <script>
   let videoEnded = false;
@@ -168,27 +156,26 @@
     };
   }
 
-window.addEventListener('scroll', () => {
-    const videoHeight = video.getBoundingClientRect().height;
-    const topValue = video.getBoundingClientRect().y;
-    const screenH = window.innerHeight;
+  window.addEventListener('scroll', (event) => {
+    const videoHeight = video.getBoundingClientRect().height
+    const topValue = video.getBoundingClientRect().y
+    const screenH = window.screen.height;
 
     if (!isOpened) {
-        if (topValue < screenH - videoHeight) {
-            openAd();
-            isOpened = true;
-        }
-    }
-
-    if (topValue < screenH - videoHeight / 2 && topValue > -(videoHeight / 2)) {
-        if (video.paused) {
-            video.play().catch(error => console.log("Video play failed:", error));
-        }
+      if (topValue < screenH - videoHeight) {
+        openAd()
+        isOpened = true
+      }
     } else {
-        if (!video.paused) {
-            video.pause();
-        }
+      if (
+        topValue < screenH - videoHeight / 2 &&
+        topValue > -(videoHeight / 2)
+      ) {
+        playVideo();
+      } else {
+        pauseVideo();
+      }
     }
-});
+  });
 </script>
 </html>
