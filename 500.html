@@ -123,17 +123,22 @@
   }
 
   function openAd() {
+    if (isOpened) return; // 確保只執行一次
+    isOpened = true;
+
     const slot = adVideoWrapper ? adVideoWrapper : adImageWrapper;
     const topWrapperHeight = adVideoWrapper ? adVideoWrapper.clientHeight : adImageWrapper.clientHeight;
 
-    const openHeight = topWrapperHeight + (adImage2Wrapper.clientWidth / 0.7 / 300 * 80);
+    // 設定影片與 banner 的寬度與位置
+    slot.style.width = '100%';
+    adWrapper.style.paddingBottom = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
+    adBanner.style.top = '0px';
+    adBanner.style.width = '100%';
+    adBanner.style.height = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
 
-slot.style.width = '100%';
-adWrapper.style.paddingBottom = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
-adBanner.style.top = slot.clientHeight + 'px';
-adBanner.style.width = '100%';
-adBanner.style.height = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
-  }
+    // **直接播放影片，確保同步顯示**
+    video.play().catch(error => console.log("Video play failed:", error));
+}
 </script>
 <script>
   let videoEnded = false;
