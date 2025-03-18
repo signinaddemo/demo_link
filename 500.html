@@ -14,19 +14,16 @@
 
       #ad-wrapper {
         width: 100%;
-        height: calc(100vw * 0.5625);
         position: relative;
         overflow: hidden;
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: column; /* 影片在上，圖片在下 */
+        align-items: center;
       }
 
       #video-wrapper {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        width:30%;
-        cursor:pointer;
+        width: 100%;
+        cursor: pointer;
       }
 
       #video {
@@ -37,7 +34,7 @@
 
       #img-wrapper {
         cursor: pointer;
-        width: 30%;
+        width: 100%;
       }
 
       #img {
@@ -64,7 +61,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 70%;
+        width: 100%;
         height: 100%;
         overflow: hidden;
       }
@@ -136,14 +133,10 @@
       .then(() => {
         if (false) {
           adImage2Wrapper.style.opacity = 0;
-          TweenMax.to(adImage2Wrapper, 0, { opacity: 0 });
-            return delay(0);
         }
       })
       .then(() => {
         if (false) {
-          TweenMax.to(adImage2Wrapper, 0, { opacity: 0 });
-        }
       });
     slot.style.transition = 'width 0.8s';
 adBanner.style.transition = 'all 0.8s';
