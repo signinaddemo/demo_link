@@ -126,27 +126,26 @@
     if (isOpened) return; // 確保只執行一次
     isOpened = true;
 
-    const slot = adVideoWrapper ? adVideoWrapper : adImageWrapper;
-    const topWrapperHeight = adVideoWrapper ? adVideoWrapper.clientHeight : adImageWrapper.clientHeight;
+    // 確保 ad-wrapper 擁有適當高度
+    adWrapper.style.position = 'relative';
+    adWrapper.style.height = 'auto';
 
-    // 設定影片的樣式，確保在最上方
-    video.style.position = 'absolute'; 
-    video.style.top = '0px'; 
-    video.style.left = '0px';
+    // 設定影片樣式，保持 relative 以確保正常排列
+    video.style.position = 'relative'; 
     video.style.width = '100%';
     video.style.height = 'auto';
-    video.style.zIndex = '10'; // **確保影片在最上方**
+    video.style.zIndex = '10'; // 確保影片在最上方
 
-    // 設定 banner 的樣式，確保它在影片下方
-    adBanner.style.position = 'absolute';
-    adBanner.style.top = video.clientHeight + 'px'; // **讓 banner 緊貼在影片底部**
+    // 設定 banner 樣式，讓它緊貼影片底部
+    adBanner.style.position = 'relative';
     adBanner.style.width = '100%';
-    adBanner.style.height = (adImage2Wrapper.clientWidth / 0.7 / 300 * 80) + 'px';
-    adBanner.style.zIndex = '5'; // **比影片低，確保不會覆蓋影片**
+    adBanner.style.height = 'auto';
+    adBanner.style.zIndex = '5'; // 確保不會覆蓋影片
 
     // **直接播放影片，確保同步顯示**
     video.play().catch(error => console.log("Video play failed:", error));
 }
+
 </script>
 <script>
   let videoEnded = false;
