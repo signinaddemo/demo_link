@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo link</title>
+  <style>
+    body {
+      background: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: calc(100% - 48px);
+      max-width: 640px;
+    }
+
+    video {
+      width: 100%;
+    }
+
+    p {
+      color: white;
+      width: 100%
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <video controls autoplay loop muted playsinline id="video">
+      <source src="./images/538/0211_MAZDA_55s_10m_720p.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <p>Any companion ads will display here when the advertisment begins.</p>
+  </div>
+</body>
+  <script>
+      function openUrl() {
+    window.open('https://contact.mazda.com.tw/testdrive_arrive/offers.aspx?utm_source=SigninAD_Video&utm_medium=25MY_Video&utm_campaign=202504_25MY_Campaign&utm_content=M3&CX-30');
+  }
+</script>
+</html>
