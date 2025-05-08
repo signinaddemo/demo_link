@@ -87,24 +87,25 @@
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <img class="swiper-slide-img" src="./images/592/1.png" alt="" onclick="openUrl()">
+          <img class="swiper-slide-img" src="./images/32/1.png" alt="" onclick="openUrl()">
           <div id="videoContainer">
             <video autoplay muted playsinline loop style="width: 100%" id="video" onclick="openUrl()">
               <source src="./images/592/video1.mp4" type="video/mp4">
-              alt=""
-              onclick="openUrl('https://www.nivea.com.tw/products/%E5%A6%AE%E7%B6%AD%E9%9B%85%E6%B0%B4%E6%BD%A4%E6%B3%A1%E6%B3%A1%E6%85%95%E6%96%AF150ml-40058086925760143.html?utm_source=web&utm_campaign=faceclean_launch_202303-display&utm_medium=cpm&utm_content=18-34-female-interest')"
-            />
-          </div>
-          <div class="swiper-slide">
-            <img
-              class="swiper-slide-img"
+               </div>
+        </div>
+        <img class="swiper-slide-img" src="./images/592/1.png" alt="" onclick="openUrl()">
+          <div id="videoContainer">
+            <video autoplay muted playsinline loop style="width: 100%" id="video" onclick="openUrl()">
               <source src="./images/592/video2.mp4" type="video/mp4">
-            alt=""
-              onclick="openUrl('https://bit.ly/3ApcmZO')"
             Your browser does not support the video tag.
             </video>
             <img onclick="muteButtonOnClick()" src="./images/mute.png" style="position: absolute; bottom: 16px; right: 10px; height: 24px; width: 24px;" id="muteButton" />
-          </div>
+         
+      </div>
+    </div>
+    <img src="./images/finger.png" alt="" id="finger" />
+    <img src="./images/close.png" alt="" id="close" onclick="closeAd()" />
+  </div>
 </body>
 <script>
 const banner = document.getElementById("banner");
@@ -168,5 +169,8 @@ function moveFinger() {
   }, 3500)
 }
 
+function openUrl(){
+  window.open('https://www.nivea.com.tw/products/%E5%A6%AE%E7%B6%AD%E9%9B%85%E6%B0%B4%E6%BD%A4%E6%B3%A1%E6%B3%A1%E6%85%95%E6%96%AF150ml-40058086925760143.html?utm_source=web&utm_campaign=faceclean_launch_202303-display&utm_medium=cpm&utm_content=18-34-female-interest');
+}
 </script>
 </html>
