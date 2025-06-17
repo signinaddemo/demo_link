@@ -48,7 +48,7 @@
         top: 45vw;
         right: 12px;
         z-index: 5;
-        display: none;
+        /* 直接顯示音量鍵：移除 display: none */
       }
 
       video {
@@ -83,15 +83,12 @@
     const ad = document.getElementById("ad");
     const video = document.getElementById("video");
     const button = document.getElementById("button");
-    const firstCutDuration = 3.2;
 
-    setTimeout(() => {
-      button.style.display = "block";
-    }, firstCutDuration * 1000);
+    // 🔴 已移除 firstCutDuration 與 setTimeout 延遲顯示邏輯
 
+    // 🔴 取消原本自動跳到 3.2 秒的功能，讓影片正常播完
     video.addEventListener("ended", () => {
-      video.currentTime = firstCutDuration;
-      video.play();
+      // 可自行加入重播或其他邏輯
     });
 
     const closeOnClick = () => {
