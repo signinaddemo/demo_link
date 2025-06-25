@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>變形小金剛-影+圖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #ad-wrapper {
+      width: 100%;
+      position: relative;
+      display: none; /* 初始隱藏，滾動後顯示 */
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #video-wrapper {
+      width: 100%;
+      position: relative;
+      cursor: pointer;
+    }
+
+    #video {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    #muteButton {
+      position: absolute;
+      bottom: 16px;
+      right: 10px;
+      height: 24px;
+      width: 24px;
+      z-index: 10;
+    }
+
+    #banner {
+      width: 70%; /* 讓 banner 佔 70% 寬度 */
+      height: auto;
+      position: relative;
+      display: flex;
+      justify-content: center; /* 水平置中 */
+      align-items: center;
+      margin-top: 0; /* 確保 banner 緊貼影片 */
+    }
+
+    #banner img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./images/background0.png" style="width: 100vw;" />
+  <img src="./images/background1.png" style="width: 100vw;" />
+
+  <div id="ad-wrapper">
+    <!-- 影片區塊 -->
+    <div id="video-wrapper">
+      <video loop muted playsinline id="video" onclick="openUrl()">
+        <source src="./images/666/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <img onclick="muteButtonOnClick()" src="./images/mute.png" id="muteButton" />
+    </div>
+
+    <!-- Banner 圖片區塊 -->
+    <div id="banner" onclick="openUrl()">
+      <img src="./images/666/b.png" />
+    </div>
+  </div>
+
+  <img src="./images/background2.png" style="width: 100vw;" />
+</body>
+
+<script>
+  const video = document.getElementById('video');
+  const adWrapper = document.getElementById('ad-wrapper');
+  const adBanner = document.getElementById('banner');
+  let isOpened = false;
+
+  function muteButtonOnClick() {
+    video.muted = !video.muted;
+    document.getElementById("muteButton").src = `./images/${video.muted ? 'mute' : 'volume'}.png`;
+  }
+
+  function openUrl() {
+    window.open('https://www.momoshop.com.tw/goods/GoodsDetail.jsp?mdiv=ghostShopCart&i_code=11965890&sourcePageType=4&utm_source=Presco&utm_medium=Signin_mdf&utm_campaign=BitterMelon_momo_2507');
+  }
+
+  function openAd() {
+    if (isOpened) return; // 確保只執行一次
+    isOpened = true;
+
+    // 顯示廣告區塊
+    adWrapper.style.display = 'flex';
+    adWrapper.style.flexDirection = 'column';
+    adWrapper.style.alignItems = 'center';
+
+    // **立即播放影片**
+    video.play().catch(error => console.log("Video play failed:", error));
+  }
+
+  // 滾動事件：當影片進入視窗範圍，顯示影片與 banner
+  window.addEventListener('scroll', () => {
+    const videoHeight = video.getBoundingClientRect().height;
+    const topValue = video.getBoundingClientRect().y;
+    const screenH = window.innerHeight;
+
+    if (!isOpened && topValue < screenH - videoHeight) {
+      openAd(); // 立即展開廣告
+    }
+  });
+</script>
+
+</html>
