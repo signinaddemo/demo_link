@@ -85,9 +85,13 @@
     const button = document.getElementById("button");
     const firstCutDuration = 6;
 
-    setTimeout(() => {
-      button.style.display = "block";
-    }, firstCutDuration * 1000);
+
+video.addEventListener("timeupdate", function showButtonOnTime() {
+  if (video.currentTime >= firstCutDuration) {
+    button.style.display = "block";
+    video.removeEventListener("timeupdate", showButtonOnTime);
+  }
+});
 
     video.addEventListener("ended", () => {
       video.currentTime = firstCutDuration;
