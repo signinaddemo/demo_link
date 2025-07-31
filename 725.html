@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,8 +31,9 @@
         top: 66%;
         left: 12px;
         width: 36px;
-        height: 36px;
+        height: 106px;
         z-index: 5;
+        cursor: pointer;
       }
 
       .container {
@@ -49,25 +51,40 @@
     </style>
   </head>
   <body>
+    <!-- 背景圖像 -->
     <img src="./images/background0.png" style="width: 100vw" />
     <img src="./images/background1.png" style="width: 100vw" />
     <img src="./images/background2.png" style="width: 100vw" />
+
+    <!-- 廣告區塊 -->
     <div class="cover" id="ad">
       <img src="./images/725/close.svg" id="close" onclick="closeOnClick()" />
       <div class="container">
-        <img src="./images/725/1.mp4" alt="" id="banner" />
+        <video id="banner" autoplay muted playsinline>
+          <source src="./images/725/1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
+
+    <script>
+      const ad = document.getElementById("ad");
+      const video = document.getElementById("banner");
+
+      const closeOnClick = () => {
+        ad.remove();
+      };
+
+      const openAd = () => {
+        window.open("https://youtu.be/_CFAei0Qk0k/");
+      };
+
+      // 確保影片 metadata 載入後設定起始秒數
+      video.addEventListener("loadedmetadata", () => {
+        video.currentTime = 4;
+      });
+    </script>
   </body>
-  <script>
-    const ad = document.getElementById("ad");
-
-    const closeOnClick = () => {
-      ad.remove();
-    };
-
-    const openAd = () => {
-      window.open("https://youtu.be/_CFAei0Qk0k/");
-    };
-  </script>
 </html>
+  });
+</script>
