@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -28,12 +27,11 @@
 
       #close {
         position: absolute;
-        top: 16px;
-        left: 16px;
-        width: 24px;
-        height: 24px;
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
         z-index: 5;
-        cursor: pointer;
       }
 
       .container {
@@ -43,41 +41,50 @@
         position: relative;
       }
 
-      #banner {
+      video {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+      }
+
+      #video2 {
+        display: none;
       }
     </style>
   </head>
   <body>
-    <!-- 背景圖像 -->
     <img src="./images/background0.png" style="width: 100vw" />
     <img src="./images/background1.png" style="width: 100vw" />
     <img src="./images/background2.png" style="width: 100vw" />
-
-    <!-- 廣告區塊 -->
     <div class="cover" id="ad">
-      <img src="./images/737/close.svg" id="close" onclick="closeOnClick()" />
+      <img src="./images/close.png" id="close" onclick="closeOnClick()" />
       <div class="container">
-        <video id="banner" autoplay muted playsinline>
+        <video muted playsinline autoplay id="video" onclick="openAd()">
           <source src="./images/772/1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
     </div>
+  </body>
+  <script>
+    const ad = document.getElementById("ad");
+    const video = document.getElementById("video");
+    const firstCutDuration = 3;
 
-    <script>
-      const ad = document.getElementById("ad");
-      const video = document.getElementById("banner");
+    setTimeout(() => {
+      // mute button 已移除，這裡不再顯示任何按鈕
+    }, firstCutDuration * 1000);
 
-      const closeOnClick = () => {
-        ad.remove();
-      };
+    video.addEventListener("ended", () => {
+      video.currentTime = firstCutDuration;
+      video.play();
+    });
 
-      const openAd = () => {
-        window.open("https://www.kuangchuan.com/Product/Dessert");
-      };
+    const closeOnClick = () => {
+      ad.remove();
+    };
+
+    const openAd = () => {
+      window.open("https://www.kinder.com/tw/zh/");
+    };
 
       let hasLoopStarted = false;
 
