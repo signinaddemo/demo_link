@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>content-gallery h5 template</title>
+    <style>
+      * {
+        margin: 0;
+      }
+
+      body {
+        background-color: transparent;
+      }
+
+      .cover {
+        position: fixed;
+        width: 100vw;
+        bottom: 0;
+        top: 0;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #close {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        width: 24px;
+        height: 24px;
+        z-index: 5;
+        cursor: pointer;
+      }
+
+      .container {
+        width: 100vw;
+        height: 213vw;
+        max-height: 100vh;
+        position: relative;
+      }
+
+      #banner {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 背景圖像 -->
+    <img src="./images/background0.png" style="width: 100vw" />
+    <img src="./images/background1.png" style="width: 100vw" />
+    <img src="./images/background2.png" style="width: 100vw" />
+
+    <!-- 廣告區塊 -->
+    <div class="cover" id="ad">
+      <img src="./images/737/close.svg" id="close" onclick="closeOnClick()" />
+      <div class="container">
+        <video id="banner" autoplay muted playsinline>
+          <source src="./images/772/1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <script>
+      const ad = document.getElementById("ad");
+      const video = document.getElementById("banner");
+
+      const closeOnClick = () => {
+        ad.remove();
+      };
+
+      const openAd = () => {
+        window.open("https://www.kuangchuan.com/Product/Dessert");
+      };
+
+      let hasLoopStarted = false;
+
+      // 第一次播放完畢，從第 10 秒開始無限播放
+      video.addEventListener("ended", () => {
+        if (!hasLoopStarted) {
+          hasLoopStarted = true;
+        }
+        // 每次播放完跳回第 10 秒並再次播放（手動模擬 loop）
+        video.currentTime = 10;
+        video.play();
+      });
+    </script>
+  </body>
+</html>
