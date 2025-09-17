@@ -18,7 +18,7 @@
         position: relative;
         overflow: hidden;
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: row-reverse; /* 初始維持你的橫向配置 */
       }
 
       #video-wrapper {
@@ -70,35 +70,33 @@
       }
     </style>
 
-    <!-- 覆寫樣式：避免重疊 -->
+    <!-- 覆寫樣式：讓 banner 回到正常排版，避免覆蓋；展開後仍不重疊 -->
     <style>
+      /* 初始仍可橫排，但用正常文流避免覆蓋 */
       #banner {
         position: relative !important;
         top: auto !important;
         left: auto !important;
         width: 70%;
         height: 100% !important;
+        overflow: hidden;
       }
-
       #image2-wrapper {
         position: relative !important;
         width: 100%;
         height: 100% !important;
       }
-
       #image2-wrapper img {
         width: 100%;
         height: 100% !important;
-        object-fit: contain;
+        object-fit: contain; /* 等比顯示 */
         display: block;
-        aspect-ratio: auto !important;
       }
 
+      /* 左側 640x600 容器也吃滿父層高度，兩邊對齊 */
       #img-wrapper > div {
         height: 100% !important;
-        aspect-ratio: auto !important;
       }
-
       #video {
         width: 100%;
         height: 100% !important;
@@ -106,6 +104,7 @@
         display: block;
       }
 
+      /* 讓 flex 子項目等高，避免一高一低的錯覺重疊 */
       #ad-wrapper {
         align-items: stretch !important;
       }
@@ -157,35 +156,29 @@
     window.open('https://www.boucheron.com/tw/');
   }
 
+  /* === 重點：展開後改為直向堆疊，並用 16:9 計算高度，不再用 top/padding 疊放 === */
   function openAd() {
-    const slot = adVideoWrapper ? adVideoWrapper : adImageWrapper;
-    const topWrapperHeight = adVideoWrapper ? adVideoWrapper.clientHeight : adImageWrapper.clientHeight;
+    // 切換成直向堆疊，讓 banner 自然在下方顯示
+    adWrapper.style.transition = 'all 0.8s';
+    adWrapper.style.flexDirection = 'column';     // 從 row-reverse → column（上下排列）
+    adWrapper.style.height = 'auto';              // 自動撐高容器
 
-    const openHeight = topWrapperHeight + (adImage2Wrapper.clientWidth / 0.7 / 640 * 600);
-
-    delay()
-      .then(() => {
-        if (false) {
-          adImage2Wrapper.style.opacity = 0;
-          TweenMax.to(adImage2Wrapper, 0, { opacity: 1 });
-            return delay(0);
-        }
-      })
-      .then(() => {
-        if (false) {
-          TweenMax.to(adImage2Wrapper, 0, { opacity: 0 });
-        }
-      });
-
-
-    slot.style.transition = 'width 0.8s';
-    adBanner.style.transition = 'all 0.8s';
-
-    slot.style.width = '100%';
-    adWrapper.style.paddingBottom = (adImage2Wrapper.clientWidth / 0.7 / 640 * 600) + 'px';
-    adBanner.style.top = slot.clientHeight + 'px';
+    // 上方圖與下方 banner 都滿版寬
+    adImageWrapper.style.width = '100%';
     adBanner.style.width = '100%';
-    adBanner.style.height = (adImage2Wrapper.clientWidth / 0.7 / 640 * 600) + 'px';
+
+    // 確保不再用絕對定位
+    adBanner.style.position = 'relative';
+    adBanner.style.top = 'auto';
+    adBanner.style.left = 'auto';
+
+    // 依目前可用寬度算出 16:9 展開高度
+    const w = adBanner.clientWidth || adImage2Wrapper.clientWidth || adWrapper.clientWidth;
+    const bannerHeight = Math.round(w * (360 / 640));
+    adBanner.style.height = bannerHeight + 'px';
+
+    // 子層也設為對應高度
+    adImage2Wrapper.style.height = '100%';
   }
 </script>
 <script>
