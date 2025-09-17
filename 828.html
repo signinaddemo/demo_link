@@ -77,35 +77,37 @@
         top: auto !important;
         left: auto !important;
         width: 70%;
-        height: auto;
+        height: 100% !important;
       }
 
       #image2-wrapper {
         position: relative !important;
         width: 100%;
-        height: auto !important;
+        height: 100% !important;
       }
 
       #image2-wrapper img {
         width: 100%;
-        height: auto;
+        height: 100% !important;
         object-fit: contain;
         display: block;
-        aspect-ratio: 640 / 360;
+        aspect-ratio: auto !important;
       }
 
       #img-wrapper > div {
-        aspect-ratio: 640 / 600;
+        height: 100% !important;
+        aspect-ratio: auto !important;
       }
 
       #video {
         width: 100%;
-        height: 100%;
+        height: 100% !important;
         object-fit: contain;
+        display: block;
       }
 
       #ad-wrapper {
-        align-items: stretch;
+        align-items: stretch !important;
       }
     </style>
 </head>
@@ -113,7 +115,7 @@
   <img src="./images/background0.png" style="width: 100vw;" />
   <img src="./images/background1.png" style="width: 100vw;" />
   <div id="ad-wrapper" onclick="openUrl()">
-    <!-- video.jpg -->
+    <!-- 左邊 640x600 -->
     <div id="img-wrapper">
       <div style="width: 100%; display: flex; justify-content: center; position: relative;">
         <img src="./images/828/640x600.jpg" alt="" id="video" />
@@ -125,7 +127,7 @@
       </div>
     </div>
 
-    <!-- b.jpg -->
+    <!-- 右邊 640x360 -->
     <div id="banner" class="swiper-wrapper">
       <div id="image2-wrapper">
         <img src="./images/828/640x360.jpg"/>
